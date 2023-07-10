@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>
+        <%=app_name%>
+    </title>
+
+    <!-- Custom fonts for this template-->
+    <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Page level plugin CSS-->
+    <link href="/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="/../css/sb-admin.css" rel="stylesheet">
+
+    <!-- Toast -->
+    <link href="/../toastr/toastr.min.css" rel="stylesheet" />
+
+    <!-- Ícone -->
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+
+    <!-- Datatable -->
+    <link rel="stylesheet" type="text/css" href="/DataTables/datatables.min.css" />
+
+    <link rel="stylesheet" type="text/css" href="/DataTables/Buttons-1.5.2/css/buttons.bootstrap.min.css" />
+</head>
+
+<body id="page-top">
+    <% include ../comum/navbar %>
+
+        <div id="wrapper">
+            <div id="content-wrapper">
+                <div class="container-fluid">
+
+                    <!-- Page Content -->
+                    <div class="card">
+                        <div class="card-header">Funcionários | Cadastrados</div>
+                        <div class="card-body">
+
+                            <div class="tab-content" id="nav-tabContent">
+
+                                <div class="table-responsive mt-3">
+                                    <table class="table table-hover table-bordered table-sm gridFuncionariosCadastrados"
+                                        id="gridFuncionariosCadastrados" style="width:100%">
+                                        <thead>
+                                            <tr>
+                                                <th>Nome</th>
+                                                <th>CPF</th>
+                                                <th>Cargo</th>
+                                                <th>Admissão</th>
+                                                <th>Demissão</th>
+                                                <th>Alterar</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div class="table-responsive">
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- /.container-fluid -->
+
+            <!-- Modal para alteração do Funcionario -->
+            <div class="modal fade" id="modalAlterarFuncionario" tabindex="-1" role="dialog"
+                aria-labelledby="modalAlterarFuncionario" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title"> Alterar Funcionário </h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="d-none">
+                                <div class="col-sm-8">
+                                    <input type="text" value="" class="form-control" id="funcionario_id"
+                                        name="funcionario_id" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="nome_completo_funcionario" class="col-sm-2 col-form-label">Nome Completo:
+                                </label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="nome_completo_funcionario"
+                                        placeholder="Nome Completo do Funcionário" name="nome_completo_funcionario"
+                                        required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="cpf_cnpj_funcionario" class="col-sm-2 col-form-label">CPF: </label>
+                                <div class="col-sm-10">
+                                    <input type="number" class="form-control" id="cpf_cnpj_funcionario"
+                                        placeholder="CPF | CNPJ do Funcionário" name="cpf_cnpj_funcionario">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label" for="formacao_funcionario">Função:</label>
+                                <div class="col-sm-10">
+                                    <select class="custom-select my-1 mr-sm-2" id="formacao_funcionario"
+                                        name="formacao_funcionario" required>
+
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="crea_funcionario" class="col-sm-2 col-form-label">CREA: </label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="crea_funcionario"
+                                        placeholder="CREA do Funcionário" name="crea_funcionario">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="cliente_id" class="col-sm-2 col-form-label">Cliente: </label>
+                                <div class="col-sm-10">
+                                    <select class="custom-select my-1 mr-sm-2" id="cliente_id" name="cliente_id" required>
+                                        
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                            <button id="btn-salvar-alteracao" type="button" class="btn btn-primary">Salvar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <% include ../comum/footer %>
+        </div>
+        <!-- /.content-wrapper -->
+        </div>
+        <!-- /#wrapper -->
+        <% include ../comum/logout %>
+            <!-- Bootstrap core JavaScript-->
+            <script src="/vendor/jquery/jquery.min.js"></script>
+            <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+            <!-- Core plugin JavaScript-->
+            <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+            <script type="text/javascript" src="/js/jQuery-Mask-Plugin/jquery.mask.min.js"></script>
+            <!-- Custom scripts for all pages-->
+            <script src="/js/sb-admin.min.js"></script>
+            <!-- Toastr -->
+            <script src="/toastr/toastr.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+            <!-- Datatable -->
+            <script type="text/javascript" src="/DataTables/datatables.min.js"></script>
+
+            <script>
+                $(document).ready(() => {
+                    // Definições do Toastr
+                    toastr.options = {
+                        "closeButton": true,
+                        "newestOnTop": true,
+                        "progressBar": true,
+                        "positionClass": "toast-top-right"
+                    }
+                    $.fn.dataTable.ext.errMode = 'none';
+
+                    var grid_funcionarios_cadastrados = $('#gridFuncionariosCadastrados').DataTable({
+                        "stateSave": false,
+                        "searching": true,
+                        "ordering": false,
+                        "paging": true,
+                        "info": true,
+                        "autoWidth": true,
+                        "language": {
+                            "url": "/DataTables_Translate/Portuguese-Brasil.json"
+                        },
+                        "processing": false,
+                        "serverSide": false,
+                        "ajax": {
+                            "dataType": 'json',
+                            "contentType": "application/json; charset=UTF-8",
+                            "url": "/listar_funcionarios",
+                            "type": 'GET'
+                        },
+                        "columns": [{
+                            "data": "NOME",
+                            "width": "20%"
+                        }, {
+                            "data": "CPF_CNPJ",
+                            "width": "10%"
+                        }, {
+                            "data": "CARGO",
+                            "width": "10%"
+                        }, {
+                            "data": "DATA_ADMISSAO",
+                            "width": "20%"
+                        }, {
+                            "data": "DATA_DEMISSAO",
+                            "width": "35%"
+                        }, {
+                            "targets": -1,
+                            "data": null,
+                            "defaultContent": `<div class="row">
+                                                    <div class="col-sm-6" style='cursor:pointer' id='btnAlterarDadosFuncionario'>
+                                                        <i class="far fa-edit fa-1x" style="color:#3399FF"></i>
+                                                    </div>
+                                                    <div class="col-sm-6" style='cursor:pointer' id='btnExcluirFuncionario'>
+														<i class="fas fa-trash-alt fa-1x" style="color:#FF0000"></i>
+													</div>
+                                                </div>`,
+                            "width": "5%"
+                        }]
+                    });
+
+                    $('#gridFuncionariosCadastrados tbody').on('click', '#btnAlterarDadosFuncionario', function () {
+                        $("#formacao_funcionario").html("");
+                        $("#cliente_id").html("");
+
+                        var data = grid_funcionarios_cadastrados.row($(this).parents('tr')).data();
+                        
+                        $("#formacao_funcionario").append(queryFormacoes);
+                        $("#cliente_id").append(queryClientes);
+                        $("#funcionario_id").val(data.ID_FUNCIONARIO);
+                        $("#nome_completo_funcionario").val(data.NOME);
+                        $("#cpf_cnpj_funcionario").val(data.CPF_CNPJ);
+                        $("#crea_funcionario").val(data.CREA);
+
+                        $('#modalAlterarFuncionario').modal('show');
+                    });
+
+                    $('#gridFuncionariosCadastrados tbody').on('click', '#btnExcluirFuncionario', function () {
+                        var data = grid_funcionarios_cadastrados.row($(this).parents('tr')).data();
+
+                        $.ajax({
+							url: "/excluir_funcionario/" + data.ID_FUNCIONARIO,
+							type: 'delete',
+							beforeSend: (data) => {
+								$("body").addClass("loading");
+							}
+						})
+							.done((msg) => {
+								$("body").removeClass("loading");
+								if (msg.tipo == "success") {
+									grid_funcionarios_cadastrados.ajax.reload();
+									toastr.success(msg.message, "Sucesso");
+								} else {
+									toastr.warning(`Falha ao excluir o Funcionario.<br>` + msg.message, "Falha");
+								}
+							})
+							.fail((request, textStatus, errorThrown) => {
+								console.log(request.responseJSON);
+								toastr.error("Erro.<br>" + request.responseJSON, "Falha");
+							})
+							.always(() => {
+								$("body").removeClass("loading");
+							});
+                    });
+
+                    $('#btn-salvar-alteracao').click(() => {
+                        var params = {
+                            "funcionario_id": $("#funcionario_id").val(),
+                            "nome_completo_funcionario": $("#nome_completo_funcionario").val(),
+                            "cpf_cnpj_funcionario": $("#cpf_cnpj_funcionario").val(),
+                            "formacao_funcionario": $("#formacao_funcionario").val(),
+                            "crea_funcionario": $("#crea_funcionario").val(),
+                            "cliente_id": $("#cliente_id").val()
+                        }
+                        $.ajax({
+                            url: "/alterar_funcionario",
+                            type: 'patch',
+                            data: params,
+                            dataType: "json",
+                            beforeSend: (data) => {
+                                $("body").addClass("loading");
+                            }
+                        })
+                            .done((msg) => {
+                                $("body").removeClass("loading");
+                                if (msg.tipo == "success") {
+                                    $('#modalAlterarFuncionario').modal('hide');
+                                    grid_funcionarios_cadastrados.ajax.reload();
+                                    toastr.success(msg.message, "Sucesso");
+                                } else {
+                                    toastr.warning(`Falha ao funcionario.<br>` + msg.message, "Falha");
+                                }
+                            })
+                            .fail((request, textStatus, errorThrown) => {
+                                let msg = request && request.responseJSON && request.responseJSON.message || JSON.stringify(request.responseText);
+                                toastr.error("Erro.<br>" + msg, "Falha");
+                            })
+                            .always(() => {
+                                $("body").removeClass("loading");
+                            });
+                    })
+                });
+            </script>
+            <div class="customLoading"></div>
+</body>
+
+</html>

@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>
+        <%=app_name%>
+    </title>
+
+    <!-- Custom fonts for this template-->
+    <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Page level plugin CSS-->
+    <link href="/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="/../css/sb-admin.css" rel="stylesheet">
+
+    <!-- Toast -->
+    <link href="/../toastr/toastr.min.css" rel="stylesheet" />
+
+    <!-- Ícone -->
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+
+    <!-- Datatable -->
+    <link rel="stylesheet" type="text/css" href="/DataTables/datatables.min.css" />
+
+    <link rel="stylesheet" href="./bootstrap/css/bootstrap-select.min.css">
+
+    <link rel="stylesheet" type="text/css" href="/DataTables/Buttons-1.5.2/css/buttons.bootstrap.min.css" />
+</head>
+
+<body id="page-top">
+    <% include ../comum/navbar %>
+
+        <div id="wrapper">
+            <div id="content-wrapper">
+                <div class="container-fluid">
+
+                    <!-- Page Content -->
+                    <div class="card">
+                        <div class="card-header">Clientes | Cadastrados</div>
+                        <div class="card-body">
+
+                            <div class="tab-content" id="nav-tabContent">
+
+                                <div class="table-responsive mt-3">
+                                    <table class="table table-hover table-bordered table-sm gridClientesCadastrados"
+                                        id="gridClientesCadastrados" style="width:100%">
+                                        <thead>
+                                            <tr>
+                                                <th>Código</th>
+                                                <th>Razão Social</th>
+                                                <th>CNPJ</th>
+                                                <th>Alterar</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div class="table-responsive">
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- /.container-fluid -->
+
+            <!-- Modal para alteração do Cliente -->
+            <div class="modal fade" id="modalAlterarCliente" tabindex="-1" role="dialog"
+                aria-labelledby="modalAlterarCliente" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title"> Alterar Cliente </h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="d-none">
+                                <div class="col-sm-12">
+                                    <input type="text" value="" class="form-control" id="cliente_id" name="cliente_id"
+                                        required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="razao_social_cliente" class="col-sm-4 col-form-label">Razão Social:
+                                </label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="razao_social_cliente"
+                                        placeholder="Razão Social do Cliente" name="razao_social_cliente" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="endereco_cliente" class="col-sm-4 col-form-label">Endereço: </label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="endereco_cliente"
+                                        placeholder="Endereço do Cliente" name="endereco_cliente">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="numero_endereco" class="col-sm-4 col-form-label">Número Residencial:
+                                </label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="numero_endereco"
+                                        placeholder="Número Residencial" name="numero_endereco">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="endereco_email" class="col-sm-4 col-form-label">E-mail:
+                                </label>
+                                <div class="col-sm-8">
+                                    <input type="email" class="form-control" id="endereco_email"
+                                        placeholder="Endereço E-mail" name="endereco_email">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="telefone_cliente1" class="col-sm-4 col-form-label">Telefone 1: </label>
+                                <div class="col-sm-8">
+                                    <input type="number" class="form-control" id="telefone_cliente1"
+                                        placeholder="Telefone do Cliente" name="telefone_cliente1">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="telefone_cliente2" class="col-sm-4 col-form-label">Telefone 2: </label>
+                                <div class="col-sm-8">
+                                    <input type="number" class="form-control" id="telefone_cliente2"
+                                        placeholder="Telefone do Cliente" name="telefone_cliente2">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="cidade_cliente" class="col-sm-4 col-form-label">Cidade: </label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="cidade_cliente"
+                                        placeholder="Cidade do Cliente" name="cidade_cliente">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="bairro_cliente" class="col-sm-4 col-form-label">Bairro: </label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="bairro_cliente"
+                                        placeholder="Bairro do Cliente" name="bairro_cliente">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="endereco_cep" class="col-sm-4 col-form-label">CEP: </label>
+                                <div class="col-sm-8">
+                                    <input type="number" class="form-control" id="endereco_cep"
+                                        placeholder="CEP do Cliente" name="endereco_cep">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="estado_cliente" class="col-sm-4 col-form-label">Estado: </label>
+                                <div class="col-sm-8">
+                                    <select class="form-control" name="estado_cliente" id="estado_cliente"
+                                        required>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="cnpj_cliente" class="col-sm-4 col-form-label">CNPJ: </label>
+                                <div class="col-sm-8">
+                                    <input type="number" class="form-control" id="cnpj_cliente"
+                                        placeholder="CNPJ do Cliente" name="cnpj_cliente">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inscricao_estadual_cliente" class="col-sm-4 col-form-label">Inscrição
+                                    Estadual: </label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="inscricao_estadual_cliente"
+                                        placeholder="Inscrição Estadual do Cliente" name="inscricao_estadual_cliente">
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                            <button id="btn-salvar-alteracao" type="button" class="btn btn-primary">Salvar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal para Cadastro de Veiculo -->
+            <div class="modal fade" id="modalVeiculosCliente" tabindex="-1" role="dialog"
+                aria-labelledby="modalVeiculosCliente" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title"> Veiculos </h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="card-header">Cadastrar | Veiculo</div>
+                        <div class="modal-body">
+                            <div class="d-none">
+                                <div class="col-sm-12">
+                                    <input type="text" value="" class="form-control" id="cliente_id" name="cliente_id"
+                                        required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="placa_veiculo" class="col-sm-2 col-form-label">Placa:</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="placa_veiculo"
+                                        placeholder="Placa do Veiculo" name="placa_veiculo" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="chassi_veiculo" class="col-sm-2 col-form-label">Chassi:</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="chassi_veiculo"
+                                        placeholder="Chassi do Veiculo" name="chassi_veiculo" required>
+                                </div>
+                            </div>
+                            <div class="card-header">Veiculos | Cadastrados</div>
+                            <div class="table-responsive mt-3">
+                                <table class="table table-hover table-bordered table-sm gridVeiculosCliente"
+                                    id="gridVeiculosCliente" style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th>Placa</th>
+                                            <th>Chassi</th>
+                                            <th>Ações</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div class="table-responsive">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                            <button id="btn-salvar-veiculo" type="button" class="btn btn-primary">Salvar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <% include ../comum/footer %>
+        </div>
+        <!-- /.content-wrapper -->
+        </div>
+        <!-- /#wrapper -->
+        <% include ../comum/logout %>
+            <!-- Bootstrap core JavaScript-->
+            <script src="/vendor/jquery/jquery.min.js"></script>
+            <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+            <!-- Core plugin JavaScript-->
+            <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+            <script type="text/javascript" src="/js/jQuery-Mask-Plugin/jquery.mask.min.js"></script>
+            <!-- Custom scripts for all pages-->
+            <script src="/js/sb-admin.min.js"></script>
+            <!-- Toastr -->
+            <script src="/toastr/toastr.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+            <!-- Datatable -->
+            <script type="text/javascript" src="/DataTables/datatables.min.js"></script>
+
+            <script src="./bootstrap/js/bootstrap-select.min.js"></script>
+
+            <script>
+                $(document).ready(() => {
+                    // Definições do Toastr
+                    toastr.options = {
+                        "closeButton": true,
+                        "newestOnTop": true,
+                        "progressBar": true,
+                        "positionClass": "toast-top-right"
+                    }
+                    $.fn.dataTable.ext.errMode = 'none';
+
+                    var estados = [{ UF: 'RO', NAME: 'Rondônia' },
+                    { UF: 'AC', NAME: 'Acre' },
+                    { UF: 'AM', NAME: 'Amazonas' },
+                    { UF: 'RR', NAME: 'Roraima' },
+                    { UF: 'PA', NAME: 'Pará' },
+                    { UF: 'AP', NAME: 'Amapá' },
+                    { UF: 'TO', NAME: 'Tocantins' },
+                    { UF: 'MA', NAME: 'Maranhão' },
+                    { UF: 'PI', NAME: 'Piauí' },
+                    { UF: 'CE', NAME: 'Ceará' },
+                    { UF: 'RN', NAME: 'Rio Grande do Norte' },
+                    { UF: 'PB', NAME: 'Paraíba' },
+                    { UF: 'PE', NAME: 'Pernambuco' },
+                    { UF: 'AL', NAME: 'Alagoas' },
+                    { UF: 'SE', NAME: 'Sergipe' },
+                    { UF: 'BA', NAME: 'Bahia' },
+                    { UF: 'MG', NAME: 'Minas' },
+                    { UF: 'ES', NAME: 'Espírito Santo' },
+                    { UF: 'RJ', NAME: 'Rio de Janeiro' },
+                    { UF: 'SP', NAME: 'São Paulo' },
+                    { UF: 'PR', NAME: 'Paraná' },
+                    { UF: 'SC', NAME: 'Santa Catarina' },
+                    { UF: 'RS', NAME: 'Rio Grande do Sul' },
+                    { UF: 'MS', NAME: 'Mato Grosso do Sul' },
+                    { UF: 'MT', NAME: 'Mato Grosso' },
+                    { UF: 'GO', NAME: 'Goiás' },
+                    { UF: 'DF', NAME: 'Distrito Federal' }];
+
+                    var grid_clientes_cadastrados = $('#gridClientesCadastrados').DataTable({
+                        "stateSave": false,
+                        "searching": true,
+                        "ordering": false,
+                        "paging": true,
+                        "info": true,
+                        "autoWidth": true,
+                        "language": {
+                            "url": "/DataTables_Translate/Portuguese-Brasil.json"
+                        },
+                        "processing": false,
+                        "serverSide": false,
+                        "ajax": {
+                            "dataType": 'json',
+                            "contentType": "application/json; charset=UTF-8",
+                            "url": "/listar_clientes",
+                            "type": 'GET'
+                        },
+                        "columns": [{
+                            "data": "ID_CLIENTE",
+                            "width": "10%"
+                        }, {
+                            "data": "RAZAO_SOCIAL",
+                            "width": "60%"
+                        }, {
+                            "data": "CNPJ",
+                            "width": "20%"
+                        }, {
+                            "targets": -1,
+                            "data": null,
+                            "defaultContent": `<div class="row">
+                                                    <div class="col-sm-4" style='cursor:pointer' id='btnAlterarDadosCliente'>
+                                                        <i class="far fa-edit fa-1x" style="color:#3399FF"></i>
+                                                    </div>
+                                                    <div class="col-sm-4" style='cursor:pointer' id='btnExcluirCliente'>
+														<i class="fas fa-trash-alt fa-1x" style="color:#FF0000"></i>
+													</div>
+                                                    <div class="col-sm-4" style='cursor:pointer' id='btnCadastrarVeiculo'>
+														<i class="fas fa-truck fa-1x" style="color:#3399FF"></i>
+													</div>
+                                                </div>`
+                        }]
+                    });
+
+                    $('#gridClientesCadastrados tbody').on('click', '#btnAlterarDadosCliente', function () {
+                        var queryEstados = "", aux = 0;
+                        $("#estado_cliente").html("");
+
+                        var data = grid_clientes_cadastrados.row($(this).parents('tr')).data();
+
+                        $("#cliente_id").val(data.ID_CLIENTE)
+                        $("#razao_social_cliente").val(data.RAZAO_SOCIAL);
+                        $("#numero_art").val(data.NUMERO_ART);
+                        $("#endereco_email").val(data.EMAIL);
+                        $("#endereco_cliente").val(data.ENDERECO);
+                        $("#numero_endereco").val(data.NUMERO);
+                        $("#telefone_cliente1").val(data.TELEFONE1);
+                        $("#telefone_cliente2").val(data.TELEFONE2);
+                        $("#cidade_cliente").val(data.CIDADE);
+                        $("#bairro_cliente").val(data.BAIRRO);
+                        $("#endereco_cep").val(data.CEP);
+                        
+                        for (let idxEstado = 0; idxEstado < estados.length; idxEstado++) {
+                            
+                            const estado = estados[idxEstado];
+
+                            if(estado.UF == data.ESTADO){
+                                aux = 1;
+                                queryEstados += `<option value="${estado.UF}" selected>${estado.UF} - ${estado.NAME}</option>`;
+                            }else{
+                                queryEstados += `<option value="${estado.UF}">${estado.UF} - ${estado.NAME}</option>`;
+                            }
+                            
+                        }
+
+                        queryEstados += aux == 0 ? '<option value="" selected>selecione..</option>' : '<option value="">selecione..</option>';
+
+                        $("#estado_cliente").append(queryEstados);
+                        $("#cnpj_cliente").val(data.CNPJ);
+                        $("#inscricao_estadual_cliente").val(data.INSCRICAO_ESTADUAL);
+
+                        $('#modalAlterarCliente').modal('show');
+                    });
+
+                    $('#gridClientesCadastrados tbody').on('click', '#btnCadastrarVeiculo', function () {
+                        var data = grid_clientes_cadastrados.row($(this).parents('tr')).data();
+                        let cliente = data.ID_CLIENTE;
+
+                        grid_veiculos_cliente.ajax.url('/veiculos/cliente/' + cliente).load();
+                        
+                        const placaVeiculo = document.querySelector("#placa_veiculo");
+                        const chassisVeiculo = document.querySelector("#chassi_veiculo");
+                        $("#cliente_id").val(cliente);
+                        placaVeiculo.value = '';
+                        chassisVeiculo.value = '';
+    
+                        $('#modalVeiculosCliente').modal('show');
+                    });
+
+                    $('#gridClientesCadastrados tbody').on('click', '#btnExcluirCliente', function () {
+                        var data = grid_clientes_cadastrados.row($(this).parents('tr')).data();
+
+                        $.ajax({
+                            url: "/excluir_cliente/" + data.ID_CLIENTE,
+                            type: 'delete',
+                            beforeSend: (data) => {
+                                $("body").addClass("loading");
+                            }
+                        })
+                            .done((msg) => {
+                                $("body").removeClass("loading");
+                                if (msg.tipo == "success") {
+                                    grid_clientes_cadastrados.ajax.reload();
+                                    toastr.success(msg.message, "Sucesso");
+                                } else {
+                                    toastr.warning(`Falha ao excluir o Cliente.<br>` + msg.message, "Falha");
+                                }
+                            })
+                            .fail((request, textStatus, errorThrown) => {
+                                console.log(request.responseJSON);
+                                toastr.error("Erro.<br>" + request.responseJSON, "Falha");
+                            })
+                            .always(() => {
+                                $("body").removeClass("loading");
+                            });
+                    });
+
+                    $('#btn-salvar-alteracao').click(() => {
+                        var params = {
+                            "cliente_id": $("#cliente_id").val(),
+                            "razao_social_cliente": $("#razao_social_cliente").val(),
+                            "endereco_email": $("#endereco_email").val(),
+                            "endereco_cliente": $("#endereco_cliente").val(),
+                            "numero_endereco": $("#numero_endereco").val(),
+                            "telefone_cliente1": $("#telefone_cliente1").val(),
+                            "telefone_cliente2": $("#telefone_cliente2").val(),
+                            "cidade_cliente": $("#cidade_cliente").val(),
+                            "bairro_cliente": $("#bairro_cliente").val(),
+                            "endereco_cep": $("#endereco_cep").val(),
+                            "estado_cliente": $("#estado_cliente").val(),
+                            "cnpj_cliente": $("#cnpj_cliente").val(),
+                            "inscricao_estadual_cliente": $("#inscricao_estadual_cliente").val(),
+                        }
+                        $.ajax({
+                            url: "/alterar_cliente",
+                            type: 'patch',
+                            data: params,
+                            dataType: "json",
+                            beforeSend: (data) => {
+                                $("body").addClass("loading");
+                            }
+                        })
+                            .done((msg) => {
+                                $("body").removeClass("loading");
+                                if (msg.tipo == "success") {
+                                    $('#modalAlterarCliente').modal('hide');
+                                    grid_clientes_cadastrados.ajax.reload();
+                                    toastr.success(msg.message, "Sucesso");
+                                } else {
+                                    toastr.warning(`Falha ao alterar o Cliente ${$("#razao_social_cliente").val()}.<br>` + message, "Falha");
+                                }
+                            })
+                            .fail((request, textStatus, errorThrown) => {
+                                let msg = JSON.parse(request.message);
+                                toastr.error("Erro.<br>" + msg, "Falha");
+                            })
+                            .always(() => {
+                                $("body").removeClass("loading");
+                            });
+                    })
+
+                    $('#btn-salvar-veiculo').click(() => {
+                        var params = {
+                            "cliente_id": $("#cliente_id").val(),
+                            "placa": $("#placa_veiculo").val(),
+                            "chassi": $("#chassi_veiculo").val()
+                        }
+                        $.ajax({
+                            url: "/cadastrar/veiculo/cliente",
+                            type: 'post',
+                            data: params,
+                            dataType: "json",
+                            beforeSend: (data) => {
+                                $("body").addClass("loading");
+                            }
+                        })
+                            .done((msg) => {
+                                $("body").removeClass("loading");
+                                if (msg.tipo == "success") {
+                                    grid_clientes_cadastrados.ajax.reload();
+                                    toastr.success(msg.message, "Sucesso");
+                                } else {
+                                    toastr.warning(`Falha ao alterar o Cliente ${$("#razao_social_cliente").val()}.<br>` + message, "Falha");
+                                }
+                            })
+                            .fail((request, textStatus, errorThrown) => {
+                                let msg = JSON.parse(request.message);
+                                toastr.error("Erro.<br>" + msg, "Falha");
+                            })
+                            .always(() => {
+                                $('#modalVeiculosCliente').modal('hide');
+                                $("body").removeClass("loading");
+                            });
+                    });
+                    
+                    var grid_veiculos_cliente = $('#gridVeiculosCliente').DataTable({
+                        "stateSave": false,
+                        "searching": false,
+                        "ordering": false,
+                        "paging": true,
+                        "info": false,
+                        "autoWidth": true,
+                        "lengthMenu": [
+            			[2, 3, 5, -1],
+            			[2, 3, 5,  'Todos'],
+        				],
+                        "language": {
+                            "url": "/DataTables_Translate/Portuguese-Brasil.json"
+                        },
+                        "processing": false,
+                        "serverSide": false,
+                        "ajax": {
+                            "dataType": 'json',
+                            "contentType": "application/json; charset=UTF-8",
+                            "url": "/api/array_vazio",
+                            "type": 'GET'
+                        },
+                        "columns": [{
+                            "data": "PLACA"
+                        }, {
+                            "data": "CHASSI"
+                        }, {
+                            "targets": -1,
+                            "data": null,
+                            "defaultContent": `<div style='cursor:pointer' id='btnExcluirVeiculo'>
+													<i class="fas fa-trash-alt fa-1x" style="color:#FF0000"></i>
+												</div>`,
+                            "width": "5%"
+                        }]
+                    });
+
+                    $('#gridVeiculosCliente tbody').on('click', '#btnExcluirVeiculo', function () {
+                        var data = grid_veiculos_cliente.row($(this).parents('tr')).data();
+
+                        $.ajax({
+                            url: "/veiculo/cliente/" + data.ID_VEICULO,
+                            type: 'delete',
+                            beforeSend: (data) => {
+                                $("body").addClass("loading");
+                            }
+                        })
+                            .done((msg) => {
+                                $("body").removeClass("loading");
+                                if (msg.tipo == "success") {
+                                    grid_veiculos_cliente.ajax.reload();
+                                    toastr.success(msg.message, "Sucesso");
+                                } else {
+                                    toastr.warning(`Falha ao excluir o .<br>` + msg.message, "Falha");
+                                }
+                            })
+                            .fail((request, textStatus, errorThrown) => {
+                                console.log(request.responseJSON);
+                                toastr.error("Erro.<br>" + request.responseJSON, "Falha");
+                            })
+                            .always(() => {
+                                $("body").removeClass("loading");
+                            });
+                    });
+
+                });
+            </script>
+            <div class="customLoading"></div>
+</body>
+
+</html>

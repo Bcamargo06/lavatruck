@@ -1,0 +1,38 @@
+{
+  "name": "lavatruck",
+  "app_name": "Truck Lavagens",
+  "copyright": "Jes Consultoria",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Jes",
+    "Consultoria"
+  ],
+  "author": "Alyson Siqueira",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.25.0",
+    "bootstrap-select": "^1.13.18",
+    "consign": "^0.1.6",
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "dotenv": "^8.2.0",
+    "ejs": "^2.7.4",
+    "express": "^4.17.1",
+    "express-session": "^1.17.3",
+    "fs": "0.0.1-security",
+    "helmet": "^3.23.3",
+    "html-pdf": "^3.0.1",
+    "http-errors": "^1.8.0",
+    "memorystore": "^1.6.2",
+    "mysql": "^2.18.1",
+    "nodemailer": "^6.9.1",
+    "pdfkit": "^0.13.0",
+    "pdfkit-table": "^0.1.99",
+    "toastr": "^2.1.4"
+  }
+}

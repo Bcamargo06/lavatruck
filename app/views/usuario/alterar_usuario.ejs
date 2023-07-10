@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>
+        <%=app_name%>
+    </title>
+
+    <!-- Custom fonts for this template-->
+    <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Page level plugin CSS-->
+    <link href="/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="/../css/sb-admin.css" rel="stylesheet">
+
+    <!-- Toast -->
+    <link href="/../toastr/toastr.min.css" rel="stylesheet" />
+
+    <!-- Ícone -->
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+
+    <!-- Datatable -->
+    <link rel="stylesheet" type="text/css" href="/DataTables/datatables.min.css" />
+
+    <link rel="stylesheet" type="text/css" href="/DataTables/Buttons-1.5.2/css/buttons.bootstrap.min.css" />
+</head>
+
+<body id="page-top">
+    <% include ../comum/navbar %>
+
+        <div id="wrapper">
+            <div id="content-wrapper">
+                <div class="container-fluid">
+
+                    <!-- Page Content -->
+                    <div class="card">
+                        <div class="card-header">Alterar | Usuário</div>
+                        <div class="card-body">
+
+                            <div class="tab-content" id="nav-tabContent">
+
+                                <div class="table-responsive mt-3">
+                                    <table class="table table-hover table-bordered table-sm gridUsuariosCadastrados"
+                                        id="gridUsuariosCadastrados" style="width:100%">
+                                        <thead>
+                                            <tr>
+                                                <th>Nome</th>
+                                                <th>Usuario</th>
+                                                <th>Email</th>
+                                                <th>Situação</th>
+                                                <th>Cliente</th>
+                                                <th>Grupo</th>
+                                                <th>Ações</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div class="table-responsive">
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- /.container-fluid -->
+
+            <!-- Modal para alteração do Usuário -->
+            <div class="modal fade" id="modalAlterarUsuario" tabindex="-1" role="dialog"
+                aria-labelledby="modalAlterarUsuario" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title"> Alterar Usuário </h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="d-none">
+                                <div class="col-sm-8">
+                                    <input type="text" value="" class="form-control" id="id_usuario" name="id_usuario"
+                                        required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="nome_usuario" class="col-sm-4 col-form-label">Nome: </label>
+                                <div class="col-sm-8">
+                                    <input type="text" value="" class="form-control" id="nome_usuario"
+                                        placeholder="Nome do Usuário" name="nome_usuario" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="usuario" class="col-sm-4 col-form-label">Usuário: </label>
+                                <div class="col-sm-8">
+                                    <input type="text" value="" class="form-control" id="usuario"
+                                        placeholder="Usuário"
+                                        name="usuario">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="senha_usuario" class="col-sm-4 col-form-label">Nova Senha: </label>
+                                <div class="col-sm-8">
+                                    <input type="password" value="" class="form-control" id="senha_usuario"
+                                        placeholder="Nova senha do Usuário" name="senha_usuario">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="email_usuario" class="col-sm-4 col-form-label">E-mail: </label>
+                                <div class="col-sm-8">
+                                    <input type="email" value="" class="form-control" id="email_usuario"
+                                        placeholder="E-mail do Usuário" name="email_usuario">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="situacao_usuario" class="col-sm-4 col-form-label">Situação: </label>
+                                <div class="col-sm-8">
+                                    <select class="custom-select my-1 mr-sm-2" id="situacao_usuario" name="situacao_usuario" required>
+                                        
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="codigo_cliente" class="col-sm-4 col-form-label">Cliente: </label>
+                                <div class="col-sm-8">
+                                    <select class="custom-select my-1 mr-sm-2" id="codigo_cliente" name="codigo_cliente">
+                                        
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="grupo_usuario" class="col-sm-4 col-form-label">Grupo: </label>
+                                <div class="col-sm-8">
+                                    <select class="custom-select my-1 mr-sm-2" id="grupo_usuario" name="grupo_usuario" required>
+                                        
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                            <button id="btn-salvar-alteracao" type="button" class="btn btn-primary">Salvar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <% include ../comum/footer %>
+        </div>
+        <!-- /.content-wrapper -->
+        </div>
+        <!-- /#wrapper -->
+        <% include ../comum/logout %>
+            <!-- Bootstrap core JavaScript-->
+            <script src="/vendor/jquery/jquery.min.js"></script>
+            <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+            <!-- Core plugin JavaScript-->
+            <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+            <script type="text/javascript" src="/js/jQuery-Mask-Plugin/jquery.mask.min.js"></script>
+            <!-- Custom scripts for all pages-->
+            <script src="/js/sb-admin.min.js"></script>
+            <!-- Toastr -->
+            <script src="/toastr/toastr.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+            <!-- Datatable -->
+            <script type="text/javascript" src="/DataTables/datatables.min.js"></script>
+            <div id="array_clientes"><%=JSON.stringify(recordsCliente)%></div>
+            <div id="array_grupos"><%=JSON.stringify(recordsGrupos)%></div>
+            <script>
+                $(document).ready(() => {
+                    var arrayClientes = JSON.parse($("#array_clientes").html());
+                    var arrayGrupos = JSON.parse($("#array_grupos").html());
+
+                    // Definições do Toastr
+                    toastr.options = {
+                        "closeButton": true,
+                        "newestOnTop": true,
+                        "progressBar": true,
+                        "positionClass": "toast-top-right"
+                    }
+                    $.fn.dataTable.ext.errMode = 'none';
+
+                    var grid_usuarios_cadastrados = $('#gridUsuariosCadastrados').DataTable({
+                        "stateSave": false,
+                        "searching": true,
+                        "ordering": false,
+                        "paging": true,
+                        "info": true,
+                        "autoWidth": true,
+                        "language": {
+                            "url": "/DataTables_Translate/Portuguese-Brasil.json"
+                        },
+                        "processing": false,
+                        "serverSide": false,
+                        "ajax": {
+                            "dataType": 'json',
+                            "contentType": "application/json; charset=UTF-8",
+                            "url": "/listar_usuarios",
+                            "type": 'GET'
+                        },
+                        "columns": [{
+                            "data": "NOME"
+                        }, {
+                            "data": "USUARIO"
+                        }, {
+                            "data": "EMAIL"
+                        }, {
+                            "data": "ATIVO"
+                        }, {
+                            "data": "RAZAO_SOCIAL"
+                        }, {
+                            "data": "GRUPO"
+                        }, {
+                            "targets": -1,
+                            "data": null,
+                            "defaultContent": `<div class="row">
+                                                    <%if(recordsPermissoes.indexOf('A') != -1){%>
+                                                    <div class="col-sm-6" style='cursor:pointer' id='btnAlterarUsuario'>
+                                                        <i class="far fa-edit fa-1x" style="color:#3399FF"></i>
+                                                    </div>
+                                                    <%}%>
+													<%if(recordsPermissoes.indexOf('E') != -1){%>
+                                                    <div class="col-sm-6" style='cursor:pointer' id='btnExcluirUsuario'>
+														<i class="fas fa-trash-alt fa-1x" style="color:#FF0000"></i>
+													</div>
+                                                    <%}%>
+                                                </div>`,
+                            "width": "5%"
+                        }]
+                    });
+
+                    $('#gridUsuariosCadastrados tbody').on('click', '#btnAlterarUsuario', function () {
+                        let querySituacao = "";
+                        $("#situacao_usuario").html("");
+
+                        let queryCliente = "<option value='0'>Selecione...";
+
+                        $("#codigo_cliente").html("");
+
+                        let queryGrupo = "";
+                        $("#grupo_usuario").html("");
+
+                        var data = grid_usuarios_cadastrados.row($(this).parents('tr')).data();
+                        
+                        $("#id_usuario").val(data.ID_USUARIO)
+                        $("#nome_usuario").val(data.NOME);
+                        $("#usuario").val(data.USUARIO);
+                        $("#senha_usuario").val("");
+                        $("#email_usuario").val(data.EMAIL);
+
+                        switch (data.ATIVO) {
+                            case 'ATIVO':
+                                querySituacao = `<option value="">Selecione...</option>
+									   <option value="A" selected>Ativo</option>
+									   <option value="I">Inativo</option>`;
+                                break;
+                            case 'INATIVO':
+                                querySituacao = `<option value="">Selecione...</option>
+									   <option value="A">Ativo</option>
+									   <option value="I" selected>Inativo</option>`;
+                                break;
+                            default:
+                                querySituacao = `<option value="" selected>Selecione...</option>
+									   <option value="A">Ativo</option>
+									   <option value="I">Inativo</option>`;
+                                break;
+                        }
+
+                        $("#situacao_usuario").append(querySituacao);
+
+
+                        for (const cliente of arrayClientes) {
+                            if(cliente.ID_CLIENTE == data.ID_CLIENTE){
+                                queryCliente += `<option value="${cliente.ID_CLIENTE}" selected>
+														${cliente.RAZAO_SOCIAL}
+												 </option>`;
+                            }else{
+                                queryCliente += `<option value="${cliente.ID_CLIENTE}">
+														${cliente.RAZAO_SOCIAL}
+												 </option>`;
+                            }
+                        }
+
+                        $("#codigo_cliente").append(queryCliente);
+
+                        for (const grupo of arrayGrupos) {
+                            if(grupo.DESCRICAO == data.GRUPO){
+                                queryGrupo += `<option value="${grupo.DESCRICAO}" selected>
+														${grupo.DESCRICAO}
+												 </option>`;
+                            }else{
+                                queryGrupo += `<option value="${grupo.DESCRICAO}">
+														${grupo.DESCRICAO}
+												 </option>`;
+                            }
+                        }
+
+                        $("#grupo_usuario").append(queryGrupo);
+                        
+                        $('#modalAlterarUsuario').modal('show');
+                    });
+
+                    $('#btn-salvar-alteracao').click(() => {
+                        var params = {
+                            "id_usuario": $("#id_usuario").val(),
+                            "nome_usuario": $("#nome_usuario").val(),
+                            "usuario": $("#usuario").val(),
+                            "senha_usuario": $("#senha_usuario").val(),
+                            "email_usuario": $("#email_usuario").val(),
+                            "situacao_usuario": $("#situacao_usuario").val(),
+                            "codigo_cliente": $("#codigo_cliente").val(),
+                            "grupo_usuario": $("#grupo_usuario").val()
+                        }
+                       
+                        $.ajax({
+                            url: "/alterar_cadastro_usuario",
+                            type: 'patch',
+                            data: params,
+                            dataType: "json",
+                            beforeSend: (data) => {
+                                $("body").addClass("loading");
+                            }
+                        })
+                            .done((msg) => {
+                                $("body").removeClass("loading");
+                                if (msg.tipo == "success") {
+                                    $('#modalAlterarUsuario').modal('hide');
+                                    grid_usuarios_cadastrados.ajax.reload();
+                                    toastr.success(msg.message, "Sucesso");
+                                } else {
+                                    toastr.warning(`Falha ao alterar o Usuário.<br>` + message, "Falha");
+                                }
+                            })
+                            .fail((request, textStatus, errorThrown) => {
+                                let msg = JSON.parse(request.message);
+                                toastr.error("Erro.<br>" + msg, "Falha");
+                            })
+                            .always(() => {
+                                $("body").removeClass("loading");
+                            });
+                    })
+                    
+                    $('#gridUsuariosCadastrados tbody').on('click', '#btnExcluirUsuario', function () {
+                        var data = grid_usuarios_cadastrados.row($(this).parents('tr')).data();
+
+                        $.ajax({
+							url: "/deletar_usuario/" + data.ID_USUARIO,
+							type: 'delete',
+							beforeSend: (data) => {
+								$("body").addClass("loading");
+							}
+						})
+							.done((msg) => {
+								$("body").removeClass("loading");
+								if (msg.tipo == "success") {
+									grid_usuarios_cadastrados.ajax.reload();
+									toastr.success(msg.message, "Sucesso");
+								} else {
+									toastr.warning(`Falha ao excluir o Usuário.<br>` + msg.message, "Falha");
+								}
+							})
+							.fail((request, textStatus, errorThrown) => {
+								console.log(request.responseJSON);
+								toastr.error("Erro.<br>" + request.responseJSON, "Falha");
+							})
+							.always(() => {
+								$("body").removeClass("loading");
+							});
+                    });
+                });
+            </script>
+            <div class="customLoading"></div>
+</body>
+
+</html>

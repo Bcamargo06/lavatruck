@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<title>
+		<%=app_name%>
+	</title>
+
+	<!-- Custom fonts for this template-->
+	<link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
+	<!-- Page level plugin CSS-->
+	<link href="/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+
+	<!-- Custom styles for this template-->
+	<link href="/../css/sb-admin.css" rel="stylesheet">
+
+	<!-- Toast -->
+	<link href="/../toastr/toastr.min.css" rel="stylesheet" />
+
+	<!-- Ícone -->
+	<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+
+	<!-- Datatable -->
+	<link rel="stylesheet" type="text/css" href="/DataTables/datatables.min.css" />
+
+	<link rel="stylesheet" type="text/css" href="/DataTables/Buttons-1.5.2/css/buttons.bootstrap.min.css" />
+</head>
+
+<body id="page-top">
+    <% include ../comum/navbar %>
+	<div id="wrapper">
+        <div id="content-wrapper">
+            <div class="container-fluid">
+                <!-- Dados de cabeçalho. -->
+					<div class="card mb-3">
+						<div class="card-header">
+							Serviço | Cabeçalho
+						</div>
+						<div class="card-body">
+							<div class="tab-content" id="nav-tabContent">
+								<form>
+                                    <div class="form-group row">
+                                        <div class="d-none">
+											<input type="number" class="form-control" id="id_servico"
+												name="id_servico" value="">
+										</div>
+                                    </div>
+									<div class="form-group row">
+										<label class="col-sm-1 col-form-label" for="codigo_cliente">Cliente:</label>
+										<div class="col-sm-3">
+											<select class="custom-select my-1 mr-sm-2" id="codigo_cliente" required>
+												<option value="" selected>Selecione...</option>
+												<%for(let x=0; x < recordsClientes.length; x++){%>
+													<option value="<%=recordsClientes[x].ID_CLIENTE%>">
+														<%=recordsClientes[x].RAZAO_SOCIAL%>
+													</option>
+													<%}%>
+
+											</select>
+										</div>
+										<label class="col-sm-1 col-form-label" for="veiculo_1">Veiculo 1:</label>
+										<div class="col-sm-3">
+											<input type="text" class="form-control" id="veiculo_1"
+												name="veiculo_1" placeholder="Placa 1">
+										</div>
+										<label class="col-sm-1 col-form-label" for="veiculo_2">Veiculo 2:</label>
+										<div class="col-sm-3">
+											<input type="text" class="form-control" id="veiculo_2"
+												name="veiculo_2" placeholder="Placa 2">
+										</div>
+									</div>
+
+									<div class="form-group row">
+										<label class="col-sm-1 col-form-label"
+											for="motorista">Motorista:</label>
+										<div class="col-sm-3">
+											<input type="text" class="form-control" id="motorista"
+												name="motorista" placeholder="Nome Motorista">
+										</div>
+										<label class="col-sm-1 col-form-label"
+											for="departamento">Depart.:</label>
+										<div class="col-sm-3">
+											<input type="text" class="form-control" id="departamento"
+												name="departamento" placeholder="Departamento Solicitante">
+										</div>
+                                        <label class="col-sm-1 col-form-label"
+											for="lacre">Lacre:</label>
+										<div class="col-sm-3">
+											<input type="text" class="form-control" id="lacre"
+												name="lacre" placeholder="Numero Lacre">
+										</div>
+									</div>
+
+									<div class="form-group row">
+										<label class="col-sm-1 col-form-label" for="carregamento_1">Carga 1:</label>
+										<div class="col-sm-3">
+											<input type="text" class="form-control" id="carregamento_1"
+												name="carregamento_1" placeholder="Ùltimo Carregamento">
+										</div>
+										<label class="col-sm-1 col-form-label" for="carregamento_2">Carga 2:</label>
+										<div class="col-sm-3">
+											<input type="text" class="form-control" id="carregamento_2"
+												name="carregamento_2" placeholder="Penúltimo Carregamento">
+										</div>
+                                        <label class="col-sm-1 col-form-label" for="carregamento_3">Carga 3:</label>
+										<div class="col-sm-3">
+											<input type="text" class="form-control" id="carregamento_3"
+												name="carregamento_3" placeholder="Antepenúltimo Carregamento">
+										</div>
+									</div>
+                                    <div class="form-group row">
+                                        <label class="col-sm-1 col-form-label" for="ordem_servico">Nº Ordem:</label>
+									    <div class="col-sm-3">
+									    	<input type="text" class="form-control" id="ordem_servico"
+									    		name="ordem_servico">
+									    </div>
+                                        <label class="col-sm-1 col-form-label" for="data_servico">Data:</label>
+									    <div class="col-sm-3">
+									    	<input type="date" class="form-control" id="data_servico"
+									    		name="data_servico">
+									    </div>
+                                        <label class="col-sm-1 col-form-label" for="unidade">Empresa:</label>
+										<div class="col-sm-3">
+											<select class="custom-select my-1 mr-sm-2" id="codigo_unidade" required>
+												<option value="">Selecione...</option>
+												<option value="1">Matriz (CIC)</option>
+												<option value="2" selected>Filial (Balsa Nova)</option>
+											</select>
+										</div>
+                                    </div>
+                                    <div class="form-group row d-none">
+                                        <label class="col-sm-1 col-form-label" for="valor_desconto">Desconto:</label>
+									    <div class="col-sm-3">
+									    	<input type="number" class="form-control" id="valor_desconto"
+									    		name="valor_desconto" placeholder="R$ 00,00">
+									    </div>
+                                    </div>
+								</form>
+								<button type="button" class="btn btn-primary" id="btn-gerar-servico">Gerar <i
+										class="far fa-file-alt"></i></button>
+							</div>
+						</div>
+					</div>
+
+					<!-- Dados de itens. -->
+					<div class="card mb-3">
+						<div class="card-header">
+							Serviço | Produtos
+						</div>
+						<div class="card-body" id="card">
+							<form>
+								<div class="form-group row">
+									<label class="col-sm-1 col-form-label" for="observacao">Produto:</label>
+									<div class="col-sm-6">
+										<select class="form-control selectpicker" name="selectProduto"
+											id="selectProduto" data-live-search="true" required>
+											<option value="" selected>Selecione...</option>
+											<%for(let i=0; i < recordsProdutos.length; i++){%>
+												<option value="<%=recordsProdutos[i].ID_PRODUTO%>">
+													<%=recordsProdutos[i].DESCRICAO_PRODUTO%>
+												</option>
+											<%}%>
+										</select>
+									</div>
+                                    <div class="col-sm-2">
+                                        <input type="number" class="form-control" id="valor_produto"
+                                            name="valor_produto" placeholder="R$ 00,00" value="">
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <input type="number" class="form-control" id="quantidade"
+                                            name="quantidade" placeholder="0" value="1">
+                                    </div>
+									<div class="col-sm-1">
+										<button type="button" class="btn btn-primary" id="btn-adicionar-produto">Adicionar</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+
+					<!-- Carrinho -->
+					<div class="card mb-3">
+						<div class="card-header">
+							Serviço | Produtos no Carrinho
+						</div>
+
+						<div class="card-body" id="card">
+							<button type="button" class="btn btn-danger" id="btn-deletar_produtos">Deletar <i
+									class="fas fa-trash-alt"></i></button>
+							<div class="table-responsive mt-3">
+								<table class="table table-hover table-bordered table-sm gridProdutosCarrinho"
+									id="gridProdutosCarrinho" style="width:100%">
+									<thead>
+										<tr>
+											<th>Produto</th>
+											<th>Descrição</th>
+											<th>Quantidade</th>
+											<th>Valor</th>
+										</tr>
+									</thead>
+								</table>
+							</div class="table-responsive">
+                            <hr>
+							<div id="total_orcamento" style=" text-align: right;">Total Serviço: R$</div>
+						</div>
+					</div>
+            </div>
+            <!-- /.container-fluid -->
+        </div>
+        <!-- /.content-wrapper -->
+        <% include ../comum/footer %>
+    <!-- /.content-wrapper -->
+    </div>
+		
+	<% include ../comum/logout %>
+	<!-- Bootstrap core JavaScript-->
+	<script src="/vendor/jquery/jquery.min.js"></script>
+	<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<!-- Core plugin JavaScript-->
+	<script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+	<script type="text/javascript" src="/js/jQuery-Mask-Plugin/jquery.mask.min.js"></script>
+	<!-- Custom scripts for all pages-->
+	<script src="/js/sb-admin.min.js"></script>
+	<!-- Toastr -->
+	<script src="/toastr/toastr.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+	<!-- Datatable -->
+	<script type="text/javascript" src="/DataTables/datatables.min.js"></script>
+    
+    <div class="d-none" id="recordsProdutos"><%=JSON.stringify(recordsProdutos)%></div>
+
+    <script>
+        $(document).ready(() => {
+            // Definições do Toastr
+            toastr.options = {
+                "closeButton": true,
+                "newestOnTop": true,
+                "progressBar": true,
+                "positionClass": "toast-top-right"
+            }
+            $.fn.dataTable.ext.errMode = 'none';
+
+            var arrayProdutos = JSON.parse($("#recordsProdutos").html());
+
+            var dateAtual = new Date();
+            dateAtual = dateAtual.toLocaleString().substring(0, 10).split('/');
+            dateAtual = dateAtual[2] + "-" + dateAtual[1] + "-" + dateAtual[0];
+
+            $("#data_servico").val(dateAtual);
+
+            var grid_produtos_carrinho = $('#gridProdutosCarrinho').DataTable({
+                "stateSave": false,
+                "searching": true,
+                "ordering": true,
+                "select": "multi",
+                "paging": true,
+                "info": true,
+                "autoWidth": true,
+                "language": {
+                    "url": "/DataTables_Translate/Portuguese-Brasil.json"
+                },
+                "processing": false,
+                "serverSide": false,
+                "ajax": {
+                    "dataType": 'json',
+                    "contentType": "application/json; charset=UTF-8",
+                    "url": "/api/array_vazio",
+                    "type": 'GET'
+                },
+                "columns": [{
+                    "data": "PRODUTO_ID"
+                }, {
+                    "data": "DESCRICAO_PRODUTO"
+                }, {
+                    "data": "QUANTIDADE"
+                }, {
+                    "data": "VALOR_TOTAL"
+                }]
+            });
+
+            grid_produtos_carrinho.on('xhr', function (e, settings, json) {
+				if (json) {
+					let total_orcamento = 0.0;
+
+					for (let i = 0; i < json.data.length; i++) {
+						total_orcamento += parseFloat(json.data[i].VALOR_TOTAL);
+					}
+
+                    total_orcamento = total_orcamento - (( total_orcamento * Number($("#valor_desconto").val())) / 100);
+
+					$("#dados_orcamento").remove();
+
+					$("#total_orcamento").append(`<a id="dados_orcamento" style="color: green; font-weight: bold;" > ` + total_orcamento.toFixed(2) + ` <a/>`);
+				}
+			});
+            
+            $("#valor_desconto").keyup((e) => {
+				if(e.key == 'Enter' || e.key == 'Tab'){
+					grid_produtos_carrinho.ajax.reload();
+				}
+			});
+
+            $("#selectProduto").change((event) => {
+                arrayProdutos.map((data) => {
+                    if(data.ID_PRODUTO == $("#selectProduto").val()){
+                        $("#valor_produto").val(data.VALOR);
+                    }
+                });
+            });
+
+            $("#btn-adicionar-produto").click((event) => {
+                if ($("#selectProduto").val()) {
+                    if ($("#codigo_cliente").val() &&
+                        $("#veiculo_1").val() &&
+                        $("#codigo_unidade").val() &&
+                        ( $("#valor_produto").val() && $("#valor_produto").val() > 1) ) {
+                        var params = {
+                            "cliente": $("#codigo_cliente").val(),
+                            "veiculo_1": $("#veiculo_1").val(),
+                            "veiculo_2": $("#veiculo_2").val(),
+                            "motorista": $("#motorista").val(),
+                            "departamento": $("#departamento").val(),
+                            "lacre": $("#lacre").val(),
+                            "carregamento_1": $("#carregamento_1").val(),
+                            "carregamento_2": $("#carregamento_2").val(),
+                            "carregamento_3": $("#carregamento_3").val(),
+                            "valor_desconto": $("#valor_desconto").val(),
+                            "ordem_servico": $("#ordem_servico").val(),
+                            "data_servico": $("#data_servico").val(),
+                            "codigo_produto": $("#selectProduto").val(),
+                            "valor_produto": $("#valor_produto").val(),
+                            "quantidade": $("#quantidade").val() || 1,
+                            "codigo_unidade": $("#codigo_unidade").val(),
+                            "id_servico": $("#id_servico").val() ? Number($("#id_servico").val()) : 0
+                        };
+
+                        $.ajax({
+                            url: "/servico/produto",
+                            type: 'post',
+                            data: params,
+                            dataType: "json",
+                            beforeSend: (data) => {
+                                $("body").addClass("loading");
+                            }
+                        })
+                            .done((msg) => {
+                                $("body").removeClass("loading");
+                                if (msg.tipo == "success") {
+                                    if( !$("#id_servico").val() ){
+                                        $("#id_servico").val(msg.ID_SERVICO)
+                                    }
+                                    grid_produtos_carrinho.ajax.url('/servico/produtos/orcamento/' + $("#id_servico").val()).load();
+                                    
+                                    toastr.success(msg.message, "Sucesso");
+                                } else {
+                                    toastr.warning(`Falha ao gerar qr code.<br>` + msg.message, "Falha");
+                                }
+                            })
+                            .fail((request, textStatus, errorThrown) => {
+                                console.log(request.responseJSON);
+                                toastr.error("Erro.<br>" + request.responseJSON.message, "Falha");
+                            })
+                            .always(() => {
+                                $("body").removeClass("loading");
+                            });
+                    } else {
+                        let msg = "";
+
+                        msg += $("#codigo_cliente").val() == "" ? 'Cliente, ' : '';
+                        msg += $("#veiculo_1").val() == "" ? 'Veiculo, ' : '';
+                        msg += $("#motorista").val() == "" ? 'Motorista, ' : '';
+
+                        toastr.error("Informe todos os dados [" + msg +" ]<br>");
+                    }
+                }
+            });
+
+            $("#btn-gerar-servico").click((event) => {
+                if ($("#codigo_cliente").val() &&
+                    $("#veiculo_1").val() &&
+                    $("#codigo_unidade").val() &&
+                    Number($("#dados_orcamento").html()) > 0) {
+
+                    var params = {
+                        "cliente": $("#codigo_cliente").val(),
+                        "veiculo_1": $("#veiculo_1").val(),
+                        "veiculo_2": $("#veiculo_2").val(),
+                        "motorista": $("#motorista").val(),
+                        "departamento": $("#departamento").val(),
+                        "lacre": $("#lacre").val(),
+                        "carregamento_1": $("#carregamento_1").val(),
+                        "carregamento_2": $("#carregamento_2").val(),
+                        "carregamento_3": $("#carregamento_3").val(),
+                        "valor_desconto": $("#valor_desconto").val(),
+                        "ordem_servico": $("#ordem_servico").val(),
+                        "data_servico": $("#data_servico").val(),
+                        "codigo_unidade": $("#codigo_unidade").val(),
+                        "id_servico": $("#id_servico").val(),
+                        "valor_total": Number($("#dados_orcamento").html()),
+                        "valor_desconto": Number($("#valor_desconto").val())
+                    };
+
+                    $.ajax({
+                        url: "/servico/fechar",
+                        type: 'put',
+                        data: params,
+                        dataType: "json",
+                        beforeSend: (data) => {
+                            $("body").addClass("loading");
+                        }
+                    })
+                        .done((msg) => {
+                            $("body").removeClass("loading");
+                            if (msg.tipo == "success") {
+                                window.location.href = "/";
+                            } else {
+                                toastr.warning(`Falha ao gerar o serviço.<br>` + msg.message, "Falha");
+                            }
+                        })
+                        .fail((request, textStatus, errorThrown) => {
+                            console.log(request.responseJSON);
+                            toastr.error("Erro.<br>" + request.responseJSON.message, "Falha");
+                        })
+                        .always(() => {
+                            $("body").removeClass("loading");
+                        });
+                } else {
+                    let msg = "";
+
+                    msg += $("#codigo_cliente").val() == "" ? 'Cliente, ' : '';
+                    msg += $("#veiculo_1").val() == "" ? 'Veiculo, ' : '';
+                    msg += $("#motorista").val() == "" ? 'Motorista, ' : '';
+                    msg += $("#codigo_unidade").val() == "" ? 'Empresa, ' : '';
+
+                    toastr.error("Informe todos os dados [" + msg +" ]<br>");
+                }
+            });
+
+            $("#btn-deletar_produtos").click(() => {
+                if ($("#codigo_caminhao").val() &&
+                    $("#codigo_cliente").val() &&
+                    $("#tipo_ensaio").val()) {
+                    var produtosAux = grid_vincular_produtos.rows('.selected').data();
+
+                    var produtos = [];
+
+                    if (produtosAux.length > 0) {
+
+                        for (let idxProd = 0; idxProd < produtosAux.length; idxProd++) {
+                            produto = {};
+                            produto.cliente = produtosAux[idxProd].CLIENTE_ID;
+                            produto.caminhao = produtosAux[idxProd].CAMINHAO_ID;
+                            produto.tipo_ensaio = produtosAux[idxProd].TIPO_ENSAIO;
+                            produto.codigo = produtosAux[idxProd].PRODUTO_ID;
+                            produto.numero_ensaio =  produtosAux[idxProd].NUMERO_ENSAIO;
+                            produto.numero_serie = produtosAux[idxProd].NUMERO_SERIE;
+
+                            produtos.push(produto);
+                        }
+
+                        var params = {
+                            "listProdutos": JSON.stringify(produtos),
+                        }
+
+                        $.ajax({
+                            url: "/excluir_produtos_selecionados_aux",
+                            type: 'delete',
+                            data: params,
+                            dataType: "json",
+                            beforeSend: (data) => {
+                                $("body").addClass("loading");
+                            }
+                        })
+                            .done((msg) => {
+                                $("body").removeClass("loading");
+                                if (msg.tipo == "success") {
+                                    grid_vincular_produtos.ajax.url('/busca_produtos_tabela_temporaria/' + $("#codigo_cliente").val() + '/' + $("#codigo_caminhao").val() + '/' + $("#tipo_ensaio").val()).load();
+                                    toastr.success(msg.message, "Sucesso");
+                                } else {
+                                    toastr.warning(`Falha ao excluir os itens selecionados.<br>` + message, "Falha");
+                                }
+                            })
+                            .fail((request, textStatus, errorThrown) => {
+                                console.log(request.responseJSON);
+                                toastr.error("Erro.<br>" + request.responseJSON.message, "Falha");
+                            })
+                            .always(() => {
+                                $("body").removeClass("loading");
+                            });
+                    }else{
+                        toastr.error("Nenhum produto selecionado.<br>");
+                    }
+                }
+            })
+
+            // Busca os rascunhos para o cliente selecionado caso tenha e popula os campos da tela
+            $("#codigo_cliente").change((event) => {
+                if($("#codigo_cliente").val()){
+                    $.ajax({
+                        url: "/servico/orcamento/cliente/" + $("#codigo_cliente").val(),
+                        type: 'get',
+                        beforeSend: (data) => {
+                            $("body").addClass("loading");
+                        }
+                    })
+                        .done((msg) => {
+                            $("body").removeClass("loading");
+                            if (msg.tipo == "success") {
+                                if(msg.ID_SERVICO){
+                                    $("#id_servico").val(msg.ID_SERVICO);
+                                    $("#veiculo_1").val(msg.VEICULO1);
+                                    $("#veiculo_2").val(msg.VAICULO2);
+                                    $("#motorista").val(msg.MOTORISTA);
+                                    $("#departamento").val(msg.DEPARTAMENTO);
+                                    $("#lacre").val(msg.LACRE);
+                                    $("#carregamento_1").val(msg.CARGA1);
+                                    $("#carregamento_2").val(msg.CARGA2);
+                                    $("#carregamento_3").val(msg.CARGA3);
+                                    $("#valor_desconto").val(msg.VALOR_DESCONTO);
+                                    $("#data_servico").val(msg.DATA_SERVICO);
+
+                                    grid_produtos_carrinho.ajax.url('/servico/produtos/orcamento/' + $("#id_servico").val()).load();
+                                }                        
+                                
+                                toastr.success(msg.message, "Sucesso");
+                            }
+                        })
+                        .fail((request, textStatus, errorThrown) => {
+                            console.log(request.responseJSON);
+                            toastr.error("Erro.<br>" + request.responseJSON.message, "Falha");
+                        })
+                        .always(() => {
+                            $("body").removeClass("loading");
+                        });
+                }
+            });
+        });
+    </script>
+	<div class="customLoading"></div>
+
+</body>
+
+</html>

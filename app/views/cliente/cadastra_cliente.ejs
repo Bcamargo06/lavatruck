@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<title>
+		<%=app_name%>
+	</title>
+
+	<!-- Custom fonts for this template-->
+	<link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
+	<!-- Page level plugin CSS-->
+	<link href="/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+
+	<!-- Custom styles for this template-->
+	<link href="/../css/sb-admin.css" rel="stylesheet">
+
+	<!-- Toast -->
+	<link href="/../toastr/toastr.min.css" rel="stylesheet" />
+
+	<!-- Ícone -->
+	<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+
+	<!-- Datatable -->
+	<link rel="stylesheet" type="text/css" href="/DataTables/datatables.min.css" />
+
+	<link rel="stylesheet" href="./bootstrap/css/bootstrap-select.min.css">
+
+	<link rel="stylesheet" type="text/css" href="/DataTables/Buttons-1.5.2/css/buttons.bootstrap.min.css" />
+</head>
+
+<body id="page-top">
+	<% include ../comum/navbar %>
+
+		<div id="wrapper">
+			<div id="content-wrapper">
+				<div class="container-fluid">
+
+					<!-- Page Content -->
+					<div class="card">
+						<div class="card-header">Cadastrar | Cliente</div>
+						<div class="card-body">
+							<div class="tab-content" id="nav-tabContent">
+
+								<form method="POST" action="/cadastrar_cliente">
+									<div class="form-group row">
+										<label for="razao_social_cliente" class="col-sm-2 col-form-label">Razão Social:
+										</label>
+										<div class="col-sm-10">
+											<input type="text" class="form-control" id="razao_social_cliente"
+												placeholder="Razão Social do Cliente" name="razao_social_cliente"
+												required>
+										</div>
+									</div>
+									<div class="form-group row">
+										<label for="endereco_cliente" class="col-sm-2 col-form-label">Endereço: </label>
+										<div class="col-sm-7">
+											<input type="text" class="form-control" id="endereco_cliente"
+												placeholder="Endereço do Cliente" name="endereco_cliente">
+										</div>
+										<label for="numero_endereco" class="col-sm-1 col-form-label">N° </label>
+										<div class="col-sm-2">
+											<input type="text" class="form-control" id="numero_endereco"
+												placeholder="Número Residencial" name="numero_endereco">
+										</div>
+									</div>
+									<div class="form-group row">
+										<label for="endereco_email" class="col-sm-2 col-form-label">E-mail:
+										</label>
+										<div class="col-sm-10">
+											<input type="email" class="form-control" id="endereco_email"
+												placeholder="Endereço E-mail" name="endereco_email">
+										</div>
+									</div>
+									<div class="form-group row">
+										<label for="telefone_cliente1" class="col-sm-2 col-form-label">Telefone 1: </label>
+										<div class="col-sm-4">
+											<input type="number" class="form-control" id="telefone_cliente1"
+												placeholder="Telefone 1" name="telefone_cliente1">
+										</div>
+										<label for="telefone_cliente2" class="col-sm-2 col-form-label">Telefone 2: </label>
+										<div class="col-sm-4">
+											<input type="number" class="form-control" id="telefone_cliente2"
+												placeholder="Telefone 2" name="telefone_cliente2">
+										</div>
+									</div>
+									<div class="form-group row">
+										<label for="cidade_cliente" class="col-sm-2 col-form-label">Cidade: </label>
+										<div class="col-sm-4">
+											<input type="text" class="form-control" id="cidade_cliente"
+												placeholder="Cidade do Cliente" name="cidade_cliente">
+										</div>
+										<label for="bairro_cliente" class="col-sm-2 col-form-label">Bairro: </label>
+										<div class="col-sm-4">
+											<input type="text" class="form-control" id="bairro_cliente"
+												placeholder="Bairro do Cliente" name="bairro_cliente">
+										</div>
+									</div>
+									<div class="form-group row">
+										<label for="endereco_cep" class="col-sm-2 col-form-label">CEP: </label>
+										<div class="col-sm-4">
+											<input type="number" class="form-control" id="endereco_cep"
+												placeholder="CEP do Cliente" name="endereco_cep">
+										</div>
+										<label for="estado_cliente" class="col-sm-2 col-form-label">Estado: </label>
+										<div class="col-sm-4">
+											<select class="form-control selectpicker" name="estado_cliente"
+												id="estado_cliente" data-live-search="true" required>
+												<option value="" selected>Selecione...</option>
+												<option value="RO">RO - Rondônia</option>
+												<option value="AC">AC - Acre</option>
+												<option value="AM">AM - Amazonas </option>
+												<option value="RR">RR - Roraima </option>
+												<option value="PA">PA - Pará </option>
+												<option value="AP">AP - Amapá </option>
+												<option value="TO">TO - Tocantins </option>
+												<option value="MA">MA - Maranhão </option>
+												<option value="PI">PI - Piauí </option>
+												<option value="CE">CE - Ceará </option>
+												<option value="RN">RN - Rio Grande do Norte </option>
+												<option value="PB">PB - Paraíba </option>
+												<option value="PE">PE - Pernambuco </option>
+												<option value="AL">AL - Alagoas </option>
+												<option value="SE">SE - Sergipe </option>
+												<option value="BA">BA - Bahia </option>
+												<option value="MG">MG - Minas Gerais </option>
+												<option value="ES">ES - Espírito Santo </option>
+												<option value="RJ">RJ - Rio de Janeiro </option>
+												<option value="SP">SP - São Paulo </option>
+												<option value="PR">PR - Paraná </option>
+												<option value="SC">SC - Santa Catarina </option>
+												<option value="RS">RS - Rio Grande do Sul</option>
+												<option value="MS">MS - Mato Grosso do Sul</option>
+												<option value="MT">MT - Mato Grosso </option>
+												<option value="GO">GO - Goiás </option>
+												<option value="DF">DF - Distrito Federal </option>
+											</select>
+										</div>
+									</div>
+									<div class="form-group row">
+									</div>
+									<div class="form-group row">
+										<label for="cnpj_cliente" class="col-sm-2 col-form-label">CNPJ: </label>
+										<div class="col-sm-4">
+											<input type="number" class="form-control" id="cnpj_cliente"
+												placeholder="CNPJ do Cliente" name="cnpj_cliente">
+										</div>
+										<label for="inscricao_estadual_cliente"
+											class="col-sm-2 col-form-label">Inscrição Estadual: </label>
+										<div class="col-sm-4">
+											<input type="number" class="form-control" id="inscricao_estadual_cliente"
+												placeholder="Inscrição Estadual do Cliente"
+												name="inscricao_estadual_cliente">
+										</div>
+									</div>
+									<button type="submit" class="btn btn-primary my-1">Salvar</button>
+								</form>
+							</div>
+						</div>
+					</div>
+			</div>
+		</div>
+		<!-- /.container-fluid -->
+
+		<% include ../comum/footer %>
+			</div>
+			<!-- /.content-wrapper -->
+			</div>
+			<!-- /#wrapper -->
+			<% include ../comum/logout %>
+				<!-- Bootstrap core JavaScript-->
+				<script src="/vendor/jquery/jquery.min.js"></script>
+				<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+				<!-- Core plugin JavaScript-->
+				<script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+				<script type="text/javascript" src="/js/jQuery-Mask-Plugin/jquery.mask.min.js"></script>
+				<!-- Custom scripts for all pages-->
+				<script src="/js/sb-admin.min.js"></script>
+				<!-- Toastr -->
+				<script src="/toastr/toastr.min.js"></script>
+				<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+				<!-- Datatable -->
+				<script type="text/javascript" src="/DataTables/datatables.min.js"></script>
+
+				<script src="./bootstrap/js/bootstrap-select.min.js"></script>
+
+				<div class="customLoading"></div>
+</body>
+
+</html>
