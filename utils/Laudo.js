@@ -30,7 +30,7 @@ module.exports.laudoToPdf = (data) => {
             const dataAtual = `Balsa Nova ${new Date().getDate()} de ${stringMes()} de ${new Date().getFullYear()}.`;
             const motorista = `Motorista: ${data.motorista}`;
             const departamento = `Departamento: ${data.departamento}`;
-            const lacre = `Lacre: ${data.lacre}`;
+            const lacre = `Lacre(s): ${data.lacre}`;
             const assinaturaCnpj = '50.659.209/0001-30';
             const assinaturaNome = 'SS LAVADOR DE CAMINHÕES';
             const assinaturaEndereco = 'Rua Guilherme Bathke, 241 ,Anexo ao posto Aventura (Centro) ';
